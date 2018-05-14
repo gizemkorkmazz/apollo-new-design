@@ -6,7 +6,8 @@ export const EditView = ({ onPress, imageSource, myStyle }) => {
 			onPress={onPress}
 			style={[
 				{
-					flexDirection: 'row'
+					flexDirection: 'row',
+					marginLeft: 15
 				},
 				myStyle
 			]}

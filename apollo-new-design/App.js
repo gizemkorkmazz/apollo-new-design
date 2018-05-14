@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, ScrollView, TouchableOpacity, Image, ImageBackground, Dimensions } from 'react-native';
 import { EditView } from './src/components/EditView';
 import { LinearGradient } from 'expo';
+import { KokpitView } from './src/components/KokpitView';
 
 const { width, height } = Dimensions.get('window');
 export default class App extends React.Component {
@@ -73,37 +74,48 @@ export default class App extends React.Component {
 					</View>
 					<ScrollView>
 						<View style={{ flexDirection: 'column', justifyContent: 'space-around' }}>
-							<View
-								style={{
-									flexDirection: 'row',
-									justifyContent: 'space-between',
-									backgroundColor: '#505881',
-									alignItems: 'center',
-									borderRadius: 20,
-									marginLeft: 20,
-									marginRight: 20
-								}}
-							>
-								<Image source={require('./assets/yenimüşteri.png')} style={{ width: 50, height: 50 }} />
-								<Text style={{ color: 'white' }}>Yeni Müşteri{'\n    '} Sayısı</Text>
-								<Text style={{ color: 'white' }}>2563215</Text>
+							<KokpitView
+								imageSource1={require('./assets/yenimüşteri.png')}
+								textTitle1="Yeni Müşteri Sayısı"
+								textTitle2="25632"
+								imageSource2={require('./assets/1.jpg')}
+							/>
 
-								<Image
-									source={require('./assets/1.jpg')}
-									style={{
-										width: 70,
-										height: 70,
-										right: 0,
-										borderTopRightRadius: 20,
-										borderBottomRightRadius: 20
-									}}
-								/>
-							</View>
+							<KokpitView
+								imageSource1={require('./assets/işletilenfaturasayısı.png')}
+								textTitle1={`İşlem Yaptıran ${'\n'} Müşteri Sayısı`}
+								textTitle2="10580"
+								imageSource2={require('./assets/2.jpg')}
+							/>
+							<KokpitView
+								imageSource1={require('./assets/işletilenfaturalarıntplamı.png')}
+								textTitle1="İşletilen Fatura Sayısı"
+								textTitle2="5326"
+								imageSource2={require('./assets/1.jpg')}
+							/>
+							<KokpitView
+								imageSource1={require('./assets/kuponadedi.png')}
+								textTitle1={`İşletilen Faturaların ${'\n'} Toplam Tutarı`}
+								textTitle2="48569321 "
+								imageSource2={require('./assets/2.jpg')}
+							/>
+							<KokpitView
+								imageSource1={require('./assets/kuponalanmüşteri.png')}
+								textTitle1="Kupon Adedi"
+								textTitle2="32168"
+								imageSource2={require('./assets/3.jpg')}
+							/>
+							<KokpitView
+								imageSource1={require('./assets/işlemyaptıranmüşteri.png')}
+								textTitle1={`Kupon Alan ${'\n'} Müşteri Sayısı`}
+								textTitle2="20695"
+								imageSource2={require('./assets/1.jpg')}
+							/>
+							{/* <View />
 							<View />
 							<View />
 							<View />
-							<View />
-							<View />
+							<View /> */}
 						</View>
 					</ScrollView>
 				</View>
