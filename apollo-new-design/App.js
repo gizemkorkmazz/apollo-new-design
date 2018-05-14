@@ -11,11 +11,11 @@ export default class App extends React.Component {
 			<View
 				style={{
 					flex: 1,
-					marginTop: 26,
 					flexDirection: 'column'
 				}}
 			>
 				<LinearGradient
+					style={{ borderBottomLeftRadius: 30 }}
 					colors={['#f194b4', '#f78cc5', '#da8ae8', '#d259cc', '#9c7aaf', '#607d8b']}
 					start={{ x: 0, y: 1 }}
 					end={{ x: 1, y: 1 }}
@@ -23,19 +23,19 @@ export default class App extends React.Component {
 					<View
 						style={{
 							flexDirection: 'column',
-							height: 150,
+							height: 200,
 							justifyContent: 'space-around'
 						}}
 					>
-						<View style={{ flexDirection: 'row' }}>
-							<EditView imageSource={require('./assets/menu.png')} />
+						<View style={{ flexDirection: 'row', marginLeft: 25 }}>
+							<EditView imageSource={require('./assets/menuicon.png')} />
 							<Text
 								style={{
 									flex: 1,
 									textAlign: 'center',
 									height: 30,
 									fontWeight: 'bold',
-									fontSize: 20,
+									fontSize: 12,
 									color: 'white'
 								}}
 							>
@@ -62,14 +62,27 @@ export default class App extends React.Component {
 							flexDirection: 'row',
 							justifyContent: 'space-around',
 							alignItems: 'center',
-							height: 100
+							height: 200
 						}}
 					>
-						<Text style={{ width: 100, height: 50, fontWeight: 'bold', fontSize: 20, color: 'white' }}>
-							PORTUS
-						</Text>
+						<View style={{ flexDirection: 'column' }}>
+							<Text
+								style={{
+									width: 100,
+									height: 50,
+									fontWeight: 'bold',
+									fontSize: 20,
+									color: 'white',
+									textAlign: 'center',
+									paddingTop: 10
+								}}
+							>
+								PORTUS
+							</Text>
+							<Text style={{ color: 'gray', paddingLeft: 5, paddingBottom: 10 }}>25632(+20.3%)</Text>
+						</View>
 						<TouchableOpacity>
-							<Text style={{ color: 'white' }}>AVM Seç </Text>
+							<Text style={{ color: '#69c3d2' }}>AVM Seç </Text>
 						</TouchableOpacity>
 					</View>
 					<ScrollView>
@@ -111,13 +124,14 @@ export default class App extends React.Component {
 								textTitle2="20695"
 								imageSource2={require('./assets/1.jpg')}
 							/>
-							{/* <View />
-							<View />
-							<View />
-							<View />
-							<View /> */}
 						</View>
 					</ScrollView>
+					<TouchableOpacity onPress={() => {}} style={{ width: 50, height: 50 }}>
+						<View>
+							<Image source={require('./assets/calender.png')} />
+							<Text style={{}}>TARİH SEÇİMİ</Text>
+						</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 		);
