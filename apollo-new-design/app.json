@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "My New Project",
+    "name": "apollo-new-design",
     "description": "This project is really great.",
-    "slug": "my-new-project",
+    "slug": "apollo-new-design",
     "privacy": "public",
     "sdkVersion": "27.0.0",
     "platforms": ["ios", "android"],
