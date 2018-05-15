@@ -11,7 +11,8 @@ export const KokpitView = ({ imageSource1, imageSource2, textTitle1, textTitle2 
 				borderRadius: 20,
 				marginLeft: 20,
 				marginRight: 20,
-				marginBottom: 10
+				marginBottom: 10,
+				height: 60
 			}}
 		>
 			<View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -24,8 +25,8 @@ export const KokpitView = ({ imageSource1, imageSource2, textTitle1, textTitle2 
 				<Image
 					source={imageSource2}
 					style={{
-						width: 70,
-						height: 70,
+						width: 60,
+						height: 60,
 						right: 0,
 						borderTopRightRadius: 20,
 						borderBottomRightRadius: 20

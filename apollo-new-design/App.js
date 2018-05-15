@@ -42,6 +42,9 @@ export default class App extends React.Component {
 							>
 								APOLLO
 							</Text>
+							<TouchableOpacity>
+								<Text style={{ color: 'white', marginTop: 18, marginRight: 20 }}>AVM Seç </Text>
+							</TouchableOpacity>
 						</View>
 						<View
 							style={{
@@ -107,36 +110,9 @@ export default class App extends React.Component {
 					}}
 				/>
 				<View style={{ flex: 3, backgroundColor: '#4a5178' }}>
-					<View
-						style={{
-							flexDirection: 'row',
-							justifyContent: 'space-around',
-							alignItems: 'center',
-							height: 200
-						}}
-					>
-						<View style={{ flexDirection: 'column' }}>
-							<Text
-								style={{
-									width: 100,
-									height: 50,
-									fontWeight: 'bold',
-									fontSize: 20,
-									color: 'white',
-									textAlign: 'center',
-									paddingTop: 10
-								}}
-							>
-								PORTUS
-							</Text>
-							<Text style={{ color: 'gray', paddingLeft: 5, paddingBottom: 10 }}>25632(+20.3%)</Text>
-						</View>
-						<TouchableOpacity>
-							<Text style={{ color: '#69c3d2' }}>AVM Seç </Text>
-						</TouchableOpacity>
-					</View>
+					/>
 					<ScrollView>
-						<View style={{ flexDirection: 'column', justifyContent: 'space-around' }}>
+						<View style={{ flexDirection: 'column', justifyContent: 'space-around', marginTop: 30 }}>
 							<KokpitView
 								imageSource1={require('./assets/yenimüşteri.png')}
 								textTitle1="Yeni Müşteri Sayısı"
