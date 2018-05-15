@@ -10,12 +10,15 @@ export default class App extends React.Component {
 		return (
 			<View
 				style={{
-					flex: 1
+					flex: 1,
+					backgroundColor: '#4a5178'
 				}}
 			>
 				<LinearGradient
 					style={{ flex: 1, borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
-					colors={['#f194b4', '#f78cc5', '#da8ae8', '#d259cc', '#9c7aaf', '#607d8b']}
+					colors={['#607d8b', '#9c7aaf', '#d259cc', '#da8ae8', '#f78cc5', '#f194b4']}
+					start={{ x: 0, y: 1 }}
+					end={{ x: 1, y: 1 }}
 				>
 					<View
 						style={{
@@ -45,20 +48,64 @@ export default class App extends React.Component {
 								alignSelf: 'center',
 								width: 150,
 								height: 80,
-								backgroundColor: 'red',
 								marginBottom: 20
 							}}
 						>
 							<View style={{ flexDirection: 'row', marginBottom: 0, alignItems: 'flex-end' }}>
-								<Text style={{ color: 'white', fontSize: 30, textAlignVertical: 'bottom' }}>48693</Text>
-								<Text style={{ color: 'white', backgroundColor: 'blue', textAlignVertical: 'bottom' }}>
+								<Text
+									style={{
+										color: 'white',
+										fontSize: 30,
+										textAlignVertical: 'bottom',
+										marginLeft: 10
+									}}
+								>
+									48693
+								</Text>
+								<Text
+									style={{
+										color: 'white',
+										textAlignVertical: 'bottom',
+										marginBottom: 7
+									}}
+								>
 									.21 TL
 								</Text>
 							</View>
 							<Text style={{ color: 'white', fontSize: 12, marginLeft: 15 }}>5326 TL (+20.3%)</Text>
 						</View>
 					</View>
+					<View
+						style={{
+							height: 10,
+							backgroundColor: 'transparent',
+							opacity: 0.5,
+							borderBottomLeftRadius: 10,
+							borderBottomRightRadius: 10
+						}}
+					/>
 				</LinearGradient>
+
+				<View
+					style={{
+						height: 12,
+						backgroundColor: '#b66da8',
+						opacity: 0.5,
+						borderBottomLeftRadius: 10,
+						borderBottomRightRadius: 10
+					}}
+				/>
+				<View
+					style={{
+						height: 9,
+						backgroundColor: '#875a7e',
+						opacity: 0.3,
+						borderBottomLeftRadius: 10,
+						borderBottomRightRadius: 10,
+						marginLeft: 15,
+						marginRight: 15
+					}}
+				/>
 				<View style={{ flex: 3, backgroundColor: '#4a5178' }}>
 					<View
 						style={{
@@ -127,14 +174,27 @@ export default class App extends React.Component {
 								textTitle2="20695"
 								imageSource2={require('./assets/1.jpg')}
 							/>
+							<View style={{ height: 100 }} />
 						</View>
 					</ScrollView>
-					<TouchableOpacity onPress={() => {}} style={{ width: 50, height: 50 }}>
-						<View>
-							<Image source={require('./assets/calender.png')} />
-							<Text style={{}}>TARİH SEÇİMİ</Text>
-						</View>
-					</TouchableOpacity>
+					<LinearGradient
+						style={{ position: 'absolute', height: 100, bottom: 0, left: 0, right: 0 }}
+						colors={['transparent', '#21253baa', '#21253b', '#131524']}
+					>
+						<TouchableOpacity onPress={() => {}}>
+							<View
+								style={{
+									flexDirection: 'row',
+									justifyContent: 'center',
+									alignItems: 'center',
+									height: 100
+								}}
+							>
+								<Image source={require('./assets/calender.png')} style={{ width: 20, height: 20 }} />
+								<Text style={{ color: '#e86d97' }}> TARİH SEÇİMİ</Text>
+							</View>
+						</TouchableOpacity>
+					</LinearGradient>
 				</View>
 			</View>
 		);
