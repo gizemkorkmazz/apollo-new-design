@@ -10,15 +10,12 @@ export default class App extends React.Component {
 		return (
 			<View
 				style={{
-					flex: 1,
-					flexDirection: 'column'
+					flex: 1
 				}}
 			>
 				<LinearGradient
-					style={{ borderBottomLeftRadius: 30 }}
+					style={{ flex: 1, borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
 					colors={['#f194b4', '#f78cc5', '#da8ae8', '#d259cc', '#9c7aaf', '#607d8b']}
-					start={{ x: 0, y: 1 }}
-					end={{ x: 1, y: 1 }}
 				>
 					<View
 						style={{
@@ -32,7 +29,8 @@ export default class App extends React.Component {
 							<Text
 								style={{
 									flex: 1,
-									textAlign: 'center',
+									marginLeft: 110,
+									marginTop: 20,
 									height: 30,
 									fontWeight: 'bold',
 									fontSize: 12,
@@ -42,21 +40,26 @@ export default class App extends React.Component {
 								APOLLO
 							</Text>
 						</View>
-						<Text
+						<View
 							style={{
 								alignSelf: 'center',
-								width: 100,
-								height: 30,
-								fontWeight: 'bold',
-								fontSize: 20,
-								color: 'white'
+								width: 150,
+								height: 80,
+								backgroundColor: 'red',
+								marginBottom: 20
 							}}
 						>
-							Kokpit
-						</Text>
+							<View style={{ flexDirection: 'row', marginBottom: 0, alignItems: 'flex-end' }}>
+								<Text style={{ color: 'white', fontSize: 30, textAlignVertical: 'bottom' }}>48693</Text>
+								<Text style={{ color: 'white', backgroundColor: 'blue', textAlignVertical: 'bottom' }}>
+									.21 TL
+								</Text>
+							</View>
+							<Text style={{ color: 'white', fontSize: 12, marginLeft: 15 }}>5326 TL (+20.3%)</Text>
+						</View>
 					</View>
 				</LinearGradient>
-				<View style={{ backgroundColor: '#4a5178' }}>
+				<View style={{ flex: 3, backgroundColor: '#4a5178' }}>
 					<View
 						style={{
 							flexDirection: 'row',
@@ -109,7 +112,7 @@ export default class App extends React.Component {
 							<KokpitView
 								imageSource1={require('./assets/kuponadedi.png')}
 								textTitle1={`İşletilen Faturaların ${'\n'} Toplam Tutarı`}
-								textTitle2="48569321 "
+								textTitle2="4869321 "
 								imageSource2={require('./assets/2.jpg')}
 							/>
 							<KokpitView
