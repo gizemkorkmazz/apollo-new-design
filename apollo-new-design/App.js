@@ -3,6 +3,7 @@ import { Text, View, ScrollView, TouchableOpacity, Image, ImageBackground, Dimen
 import { EditView } from './src/components/EditView';
 import { LinearGradient } from 'expo';
 import { KokpitView } from './src/components/KokpitView';
+import DijitalClock from './src/components/DijitalClock';
 
 const { width, height } = Dimensions.get('window');
 export default class App extends React.Component {
@@ -167,7 +168,7 @@ export default class App extends React.Component {
 								}}
 							>
 								<Image source={require('./assets/calender.png')} style={{ width: 20, height: 20 }} />
-								<Text style={{ color: '#e86d97' }}> TARİH SEÇİMİ</Text>
+								<DijitalClock />
 							</View>
 						</TouchableOpacity>
 					</LinearGradient>
