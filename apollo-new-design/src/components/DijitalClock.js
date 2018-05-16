@@ -11,7 +11,9 @@ class DigitalClock extends Component {
 		let timeFormater = this.timeFormater;
 		this.getTime = setInterval(() => {
 			let currentDate = new Date();
-			let timeFormat = `${timeFormater(currentDate.getHours())}:${timeFormater(
+			let timeFormat = ` ${timeFormater(currentDate.getDate())}.${timeFormater(
+				currentDate.getMonth() + 1
+			)}.${timeFormater(currentDate.getFullYear())} \n \  ${timeFormater(currentDate.getHours())}:${timeFormater(
 				currentDate.getMinutes()
 			)}:${timeFormater(currentDate.getSeconds())}`;
 			this.setState({
@@ -42,7 +44,7 @@ class DigitalClock extends Component {
 
 const styles = StyleSheet.create({
 	clockText: {
-		color: '#000',
+		color: '#e7cbe8',
 		fontSize: 18,
 		fontWeight: '500'
 	}

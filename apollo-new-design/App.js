@@ -44,7 +44,15 @@ export default class App extends React.Component {
 								APOLLO
 							</Text>
 							<TouchableOpacity>
-								<Text style={{ color: 'white', marginTop: 18, marginRight: 20 }}>AVM Seç </Text>
+								<Text
+									style={{
+										color: 'white',
+										marginTop: 18,
+										marginRight: 20
+									}}
+								>
+									AVM Seç{' '}
+								</Text>
 							</TouchableOpacity>
 						</View>
 						<View
@@ -158,19 +166,24 @@ export default class App extends React.Component {
 						style={{ position: 'absolute', height: 100, bottom: 0, left: 0, right: 0 }}
 						colors={['transparent', '#21253baa', '#21253b', '#131524']}
 					>
-						<TouchableOpacity onPress={() => {}}>
-							<View
-								style={{
-									flexDirection: 'row',
-									justifyContent: 'center',
-									alignItems: 'center',
-									height: 100
-								}}
-							>
-								<Image source={require('./assets/calender.png')} style={{ width: 20, height: 20 }} />
-								<DijitalClock />
-							</View>
-						</TouchableOpacity>
+						<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+							{/* <Image
+								source={require('./assets/earthgif.gif')}
+								style={{ width: 40, height: 40, marginTop: 30 }}
+							/> */}
+							<TouchableOpacity onPress={() => {}}>
+								<View
+									style={{
+										flexDirection: 'row',
+										justifyContent: 'center',
+										alignItems: 'center',
+										height: 100
+									}}
+								>
+									<DijitalClock />
+								</View>
+							</TouchableOpacity>
+						</View>
 					</LinearGradient>
 				</View>
 			</View>
