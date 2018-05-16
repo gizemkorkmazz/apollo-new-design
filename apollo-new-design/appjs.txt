@@ -1,12 +1,53 @@
 import React from 'react';
-import { Text, View, ScrollView, TouchableOpacity, Image, ImageBackground, Dimensions } from 'react-native';
+import {
+	Text,
+	View,
+	ScrollView,
+	TouchableOpacity,
+	Image,
+	ImageBackground,
+	Dimensions,
+	Animated,
+	Easing
+} from 'react-native';
 import { EditView } from './src/components/EditView';
 import { LinearGradient } from 'expo';
-import KokpitView from './src/components/KokpitView';
+import { KokpitView } from './src/components/KokpitView';
 import DijitalClock from './src/components/DijitalClock';
+import Row from './src/components/Row';
 
 const { width, height } = Dimensions.get('window');
+
 export default class App extends React.Component {
+	constructor(props) {
+		super(props);
+		var pos = new Animated.Value(0);
+		var height = new Animated.Value(0);
+		this.state = {
+			isAbsolute: false,
+			isVisible: false,
+			pos,
+			height,
+			myView: <View style={{ backgroundColor: 'red', flex: 1 }} />
+		};
+	}
+
+	animateView(yPos) {
+		Animated.timing(this.state.height, {
+			toValue: height,
+			duration: 5000,
+			easing: Easing.linear
+		}).start();
+
+		this.state.pos.setValue(yPos);
+
+		Animated.timing(this.state.pos, {
+			toValue: 0,
+			duration: 5000,
+			easing: Easing.linear
+		}).start();
+	}
+
 	render() {
 		return (
 			<View
@@ -51,7 +92,7 @@ export default class App extends React.Component {
 										marginRight: 20
 									}}
 								>
-									AVM Seç{' '}
+									AVM Seç
 								</Text>
 							</TouchableOpacity>
 						</View>
@@ -128,9 +169,18 @@ export default class App extends React.Component {
 								imageSource2={require('./assets/1.jpg')}
 							/>
 
+							<Row
+								text="1. row hadi bakalım"
+								onPress={(yPos, view) => {
+									console.log('ypos from row component : ', yPos);
+									this.setState({ myView: view });
+									this.animateView(yPos);
+								}}
+							/>
+
 							<KokpitView
 								imageSource1={require('./assets/işletilenfaturasayısı.png')}
-								textTitle1={`İşlem Yaptıran Müşteri Sayısı`}
+								textTitle1={`İşlem Yaptıran ${'\n'} Müşteri Sayısı`}
 								textTitle2="10580"
 								imageSource2={require('./assets/2.jpg')}
 							/>
@@ -142,7 +192,7 @@ export default class App extends React.Component {
 							/>
 							<KokpitView
 								imageSource1={require('./assets/kuponadedi.png')}
-								textTitle1={`İşletilen Faturaların Toplam Tutarı`}
+								textTitle1={`İşletilen Faturaların ${'\n'} Toplam Tutarı`}
 								textTitle2="4869321 "
 								imageSource2={require('./assets/2.jpg')}
 							/>
@@ -154,7 +204,7 @@ export default class App extends React.Component {
 							/>
 							<KokpitView
 								imageSource1={require('./assets/işlemyaptıranmüşteri.png')}
-								textTitle1={`Kupon Alan Müşteri Sayısı`}
+								textTitle1={`Kupon Alan ${'\n'} Müşteri Sayısı`}
 								textTitle2="20695"
 								imageSource2={require('./assets/1.jpg')}
 							/>
@@ -166,10 +216,6 @@ export default class App extends React.Component {
 						colors={['transparent', '#21253baa', '#21253b', '#131524']}
 					>
 						<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-							{/* <Image
-								source={require('./assets/earthgif.gif')}
-								style={{ width: 40, height: 40, marginTop: 30 }}
-							/> */}
 							<TouchableOpacity onPress={() => {}}>
 								<View
 									style={{
@@ -185,6 +231,22 @@ export default class App extends React.Component {
 						</View>
 					</LinearGradient>
 				</View>
+
+				<Animated.View
+					style={{
+						position: 'absolute',
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						backgroundColor: '#0005',
+						height: this.state.height,
+						width: width,
+						paddingVertical: 100,
+						paddingHorizontal: 20,
+						transform: [{ translateY: this.state.pos }]
+					}}
+				>
+					{this.state.myView}
+				</Animated.View>
 			</View>
 		);
 	}
