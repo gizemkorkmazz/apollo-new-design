@@ -4,9 +4,16 @@ import { EditView } from './src/components/EditView';
 import { LinearGradient } from 'expo';
 import KokpitView from './src/components/KokpitView';
 import DijitalClock from './src/components/DijitalClock';
+import ModalKokpitView from './src/components/ModalKokpitView';
 
 const { width, height } = Dimensions.get('window');
+
 export default class App extends React.Component {
+	state = {
+		modalIsVisible: false,
+		modalYPos: 0
+	};
+
 	render() {
 		return (
 			<View
@@ -126,6 +133,13 @@ export default class App extends React.Component {
 								textTitle1="Yeni Müşteri Sayısı"
 								textTitle2="25632"
 								imageSource2={require('./assets/1.jpg')}
+								onPress={yPos => {
+									this.setState({ modalYPos: yPos });
+									setTimeout(
+										() => this.setState({ modalIsVisible: !this.state.modalIsVisible }),
+										100
+									);
+								}}
 							/>
 
 							<KokpitView
@@ -133,30 +147,65 @@ export default class App extends React.Component {
 								textTitle1={`İşlem Yaptıran Müşteri Sayısı`}
 								textTitle2="10580"
 								imageSource2={require('./assets/2.jpg')}
+								onPress={yPos => {
+									this.setState({ modalYPos: yPos });
+									setTimeout(
+										() => this.setState({ modalIsVisible: !this.state.modalIsVisible }),
+										100
+									);
+								}}
 							/>
 							<KokpitView
 								imageSource1={require('./assets/işletilenfaturalarıntplamı.png')}
 								textTitle1="İşletilen Fatura Sayısı"
 								textTitle2="5326"
 								imageSource2={require('./assets/1.jpg')}
+								onPress={yPos => {
+									this.setState({ modalYPos: yPos });
+									setTimeout(
+										() => this.setState({ modalIsVisible: !this.state.modalIsVisible }),
+										100
+									);
+								}}
 							/>
 							<KokpitView
 								imageSource1={require('./assets/kuponadedi.png')}
 								textTitle1={`İşletilen Faturaların Toplam Tutarı`}
 								textTitle2="4869321 "
 								imageSource2={require('./assets/2.jpg')}
+								onPress={yPos => {
+									this.setState({ modalYPos: yPos });
+									setTimeout(
+										() => this.setState({ modalIsVisible: !this.state.modalIsVisible }),
+										100
+									);
+								}}
 							/>
 							<KokpitView
 								imageSource1={require('./assets/kuponalanmüşteri.png')}
 								textTitle1="Kupon Adedi"
 								textTitle2="32168"
 								imageSource2={require('./assets/3.jpg')}
+								onPress={yPos => {
+									this.setState({ modalYPos: yPos });
+									setTimeout(
+										() => this.setState({ modalIsVisible: !this.state.modalIsVisible }),
+										100
+									);
+								}}
 							/>
 							<KokpitView
 								imageSource1={require('./assets/işlemyaptıranmüşteri.png')}
 								textTitle1={`Kupon Alan Müşteri Sayısı`}
 								textTitle2="20695"
 								imageSource2={require('./assets/1.jpg')}
+								onPress={yPos => {
+									this.setState({ modalYPos: yPos });
+									setTimeout(
+										() => this.setState({ modalIsVisible: !this.state.modalIsVisible }),
+										100
+									);
+								}}
 							/>
 							<View style={{ height: 100 }} />
 						</View>
@@ -185,6 +234,17 @@ export default class App extends React.Component {
 						</View>
 					</LinearGradient>
 				</View>
+				<ModalKokpitView
+					yPos={this.state.modalYPos}
+					isVisible={this.state.modalIsVisible}
+					imageSource1={require('./assets/yenimüşteri.png')}
+					textTitle1="Yeni Müşteri Sayısı"
+					textTitle2="25632"
+					imageSource2={require('./assets/1.jpg')}
+					onPress={() => {
+						this.setState({ modalIsVisible: false });
+					}}
+				/>
 			</View>
 		);
 	}
