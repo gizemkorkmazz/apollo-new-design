@@ -1,5 +1,18 @@
 import React from 'react';
-import { Text, View, ScrollView, TouchableOpacity, Image, ImageBackground, Dimensions } from 'react-native';
+import {
+	Text,
+	View,
+	ScrollView,
+	TouchableOpacity,
+	Image,
+	ImageBackground,
+	Dimensions,
+	Modal,
+	TouchableHighlight,
+	StyleSheet,
+	Platform,
+	UIManager
+} from 'react-native';
 import { EditView } from './src/components/EditView';
 import { LinearGradient } from 'expo';
 import KokpitView from './src/components/KokpitView';
@@ -11,12 +24,17 @@ import AnimatedBG from './src/components/AnimatedBG';
 const { width, height } = Dimensions.get('window');
 
 export default class App extends React.Component {
+	constructor(props) {
+		super(props);
+	}
 	state = {
 		modalIsVisible: false,
-		modalYPos: 0
+		modalYPos: 0,
+		view: null
 	};
 
 	render() {
+		console.log(this.state.modalYPos);
 		return (
 			<View
 				style={{
@@ -24,6 +42,56 @@ export default class App extends React.Component {
 					backgroundColor: '#4a5178'
 				}}
 			>
+				<TouchableOpacity
+					style={{
+						position: 'absolute',
+						left: 0,
+						right: 0,
+						bottom: 0,
+						top: 0,
+						height: this.state.modalIsVisible ? height : 0,
+						backgroundColor: '#000a',
+						zIndex: 10
+					}}
+					onPress={() => this.setState({ modalIsVisible: false })}
+				>
+					<AnimatedComp
+						yPos={this.state.modalYPos}
+						isVisible={this.state.modalIsVisible}
+						imageSource1={require('./assets/yenimüşteri.png')}
+						textTitle1="Yeni Müşteri Sayısı 222"
+						textTitle2="25632"
+						imageSource2={require('./assets/1.jpg')}
+					/>
+				</TouchableOpacity>
+
+				{/* <Modal
+					animationType="none"
+					transparent={true}
+					visible={this.state.modalIsVisible}
+					onRequestClose={() => {
+						console.log('Modal has been closed.');
+					}}
+				>
+					<TouchableOpacity
+						style={{
+							flex: 1,
+							alignItems: 'center',
+							backgroundColor: '#00000088'
+						}}
+						onPress={() => {
+							this.setState({ modalIsVisible: !this.state.modalIsVisible });
+						}}
+					>
+						<AnimatedComp
+							yPos={this.state.modalYPos - 26}
+							imageSource1={require('./assets/yenimüşteri.png')}
+							textTitle1="Yeni Müşteri Sayısı 222"
+							textTitle2="25632"
+							imageSource2={require('./assets/1.jpg')}
+						/>
+					</TouchableOpacity>
+				</Modal> */}
 				<LinearGradient
 					style={{ flex: 1, borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
 					colors={['#607d8b', '#9c7aaf', '#d259cc', '#da8ae8', '#f78cc5', '#f194b4']}
@@ -136,11 +204,7 @@ export default class App extends React.Component {
 								textTitle2="25632"
 								imageSource2={require('./assets/1.jpg')}
 								onPress={yPos => {
-									this.setState({ modalYPos: yPos, modalIsVisible: true });
-									// setTimeout(
-									// 	() => this.setState({ modalIsVisible: !this.state.modalIsVisible }),
-									// 	100
-									// );
+									this.setState({ modalIsVisible: true, modalYPos: yPos });
 								}}
 							/>
 
@@ -150,7 +214,7 @@ export default class App extends React.Component {
 								textTitle2="10580"
 								imageSource2={require('./assets/2.jpg')}
 								onPress={yPos => {
-									this.setState({ modalYPos: yPos, modalIsVisible: true });
+									this.setState({ modalIsVisible: true, modalYPos: yPos });
 								}}
 							/>
 							<KokpitView
@@ -159,7 +223,7 @@ export default class App extends React.Component {
 								textTitle2="5326"
 								imageSource2={require('./assets/1.jpg')}
 								onPress={yPos => {
-									this.setState({ modalYPos: yPos, modalIsVisible: true });
+									this.setState({ modalIsVisible: true, modalYPos: yPos });
 								}}
 							/>
 							<KokpitView
@@ -168,7 +232,7 @@ export default class App extends React.Component {
 								textTitle2="4869321 "
 								imageSource2={require('./assets/2.jpg')}
 								onPress={yPos => {
-									this.setState({ modalYPos: yPos, modalIsVisible: true });
+									this.setState({ modalIsVisible: true, modalYPos: yPos });
 								}}
 							/>
 							<KokpitView
@@ -177,7 +241,7 @@ export default class App extends React.Component {
 								textTitle2="32168"
 								imageSource2={require('./assets/3.jpg')}
 								onPress={yPos => {
-									this.setState({ modalYPos: yPos, modalIsVisible: true });
+									this.setState({ modalIsVisible: true, modalYPos: yPos });
 								}}
 							/>
 							<KokpitView
@@ -186,7 +250,7 @@ export default class App extends React.Component {
 								textTitle2="20695"
 								imageSource2={require('./assets/1.jpg')}
 								onPress={yPos => {
-									this.setState({ modalYPos: yPos, modalIsVisible: true });
+									this.setState({ modalIsVisible: true, modalYPos: yPos });
 								}}
 							/>
 							<View style={{ height: 100 }} />
@@ -216,7 +280,7 @@ export default class App extends React.Component {
 						</View>
 					</LinearGradient>
 				</View>
-				<AnimatedBG
+				{/* <AnimatedBG
 					yPos={this.state.modalYPos}
 					onPress={() => {
 						this.setState({ modalIsVisible: false });
@@ -229,8 +293,26 @@ export default class App extends React.Component {
 						textTitle2="25632"
 						imageSource2={require('./assets/1.jpg')}
 					/>
-				</AnimatedBG>
+				</AnimatedBG> */}
 			</View>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		alignItems: 'center',
+		backgroundColor: '#ede3f2',
+		padding: 100
+	},
+	modal: {
+		flex: 1,
+		alignItems: 'center',
+		backgroundColor: '#f7021a',
+		padding: 100
+	},
+	text: {
+		color: '#3f2949',
+		marginTop: 10
+	}
+});
