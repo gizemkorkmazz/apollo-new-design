@@ -110,13 +110,15 @@ export default class ModalKokpitView extends Component {
 	}
 
 	componentWillReceiveProps(newProps) {
+		if (!newProps.isVisible) {
+		}
 		if (this.props.isVisible !== newProps.isVisible) {
 			this.state.yPosition.setValue(this.props.yPos);
 			setTimeout(() => {
 				LayoutAnimation.configureNext(CustomLayoutAnimation);
 				this.setState({ opened: !this.state.opened });
 				this.startAnimation();
-			}, 2000);
+			}, 100);
 		}
 	}
 
