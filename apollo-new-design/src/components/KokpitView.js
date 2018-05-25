@@ -10,7 +10,12 @@ export default class KokpitView extends React.Component {
 
 	handleLayout(event) {
 		this.setState({ yPos: event.nativeEvent.layout.y });
-		console.log(this.state.yPos);
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.scrollPositionChangedCounter !== this.props.scrollPositionChangedCounter) {
+			console.log('kokpitivew changed ');
+			this.measureProgressBar();
+		}
 	}
 
 	componentDidMount() {

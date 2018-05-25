@@ -61,7 +61,8 @@ export default class App extends React.Component {
 		modalIsVisible: false,
 		yPos: 0,
 		selectedItemIndex: -1,
-		modalColor: new Animated.Value(0)
+		modalColor: new Animated.Value(0),
+		scrollPositionChangedCounter: 0
 	};
 
 	animateModal() {
@@ -79,6 +80,11 @@ export default class App extends React.Component {
 			this.setState({ modalIsVisible: true });
 			this.animateModal();
 		}, 100);
+	}
+
+	onScrollEndDrag() {
+		var counter = this.state.scrollPositionChangedCounter + 1;
+		this.setState({ scrollPositionChangedCounter: counter });
 	}
 
 	render() {
@@ -108,14 +114,6 @@ export default class App extends React.Component {
 							yPos={this.state.yPos}
 							onPress={() => this.setState({ modalIsVisible: false })}
 						/>
-						{/* <TouchableOpacity
-							onPress={() => {
-								this.setState({ modalIsVisible: false });
-							}}
-						>
-							<Text>Kapat</Text>
-							
-						</TouchableOpacity> */}
 					</Animated.View>
 				</Modal>
 				<LinearGradient
@@ -222,13 +220,14 @@ export default class App extends React.Component {
 					}}
 				/>
 				<View style={{ flex: 3, backgroundColor: '#4a5178' }}>
-					<ScrollView>
+					<ScrollView onScrollEndDrag={() => this.onScrollEndDrag()}>
 						<View style={{ flexDirection: 'column', justifyContent: 'space-around', marginTop: 30 }}>
 							<KokpitView
 								data={data[0]}
 								onPress={yPos => {
 									this.handleOnPress(yPos, 0);
 								}}
+								scrollPositionChangedCounter={this.state.scrollPositionChangedCounter}
 							/>
 
 							<KokpitView
@@ -236,6 +235,7 @@ export default class App extends React.Component {
 								onPress={yPos => {
 									this.handleOnPress(yPos, 1);
 								}}
+								scrollPositionChangedCounter={this.state.scrollPositionChangedCounter}
 							/>
 
 							<KokpitView
@@ -243,6 +243,7 @@ export default class App extends React.Component {
 								onPress={yPos => {
 									this.handleOnPress(yPos, 2);
 								}}
+								scrollPositionChangedCounter={this.state.scrollPositionChangedCounter}
 							/>
 
 							<KokpitView
@@ -250,12 +251,14 @@ export default class App extends React.Component {
 								onPress={yPos => {
 									this.handleOnPress(yPos, 3);
 								}}
+								scrollPositionChangedCounter={this.state.scrollPositionChangedCounter}
 							/>
 							<KokpitView
 								data={data[4]}
 								onPress={yPos => {
 									this.handleOnPress(yPos, 4);
 								}}
+								scrollPositionChangedCounter={this.state.scrollPositionChangedCounter}
 							/>
 
 							<KokpitView
@@ -263,11 +266,12 @@ export default class App extends React.Component {
 								onPress={yPos => {
 									this.handleOnPress(yPos, 5);
 								}}
+								scrollPositionChangedCounter={this.state.scrollPositionChangedCounter}
 							/>
-							{/* <View style={{ height: 100 }} /> */}
+							<View style={{ height: 100 }} />
 						</View>
 					</ScrollView>
-					{/* <LinearGradient
+					<LinearGradient
 						style={{ position: 'absolute', height: 100, bottom: 0, left: 0, right: 0 }}
 						colors={['transparent', '#21253baa', '#21253b', '#131524']}
 					>
@@ -285,7 +289,7 @@ export default class App extends React.Component {
 								</View>
 							</TouchableOpacity>
 						</View>
-					</LinearGradient> */}
+					</LinearGradient>
 				</View>
 			</View>
 		);
