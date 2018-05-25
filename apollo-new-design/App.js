@@ -1,12 +1,17 @@
 import React from 'react';
-import { Text, View, ScrollView, TouchableOpacity, Image, ImageBackground, Dimensions } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity, Image, ImageBackground, Dimensions, Modal } from 'react-native';
 import { EditView } from './src/components/EditView';
 import { LinearGradient } from 'expo';
-import { KokpitView } from './src/components/KokpitView';
+import KokpitView from './src/components/KokpitView';
 import DijitalClock from './src/components/DijitalClock';
+import KokpitViewAnim from './src/components/KokpitViewAnim';
 
 const { width, height } = Dimensions.get('window');
 export default class App extends React.Component {
+	state = {
+		modalIsVisible: false,
+		yPos: 0
+	};
 	render() {
 		return (
 			<View
@@ -15,6 +20,33 @@ export default class App extends React.Component {
 					backgroundColor: '#4a5178'
 				}}
 			>
+				<Modal
+					animationType="none"
+					transparent={true}
+					visible={this.state.modalIsVisible}
+					onRequestClose={() => {
+						alert('Modal has been closed.');
+					}}
+				>
+					<View style={{ backgroundColor: '#0009', flex: 1, justifyContent: 'center' }}>
+						<KokpitViewAnim
+							yPos={this.state.yPos}
+							imageSource1={require('./assets/işlemyaptıranmüşteri.png')}
+							textTitle1={`Kupon Alan ${'\n'} Müşteri Sayısı`}
+							textTitle2="20695"
+							imageSource2={require('./assets/1.jpg')}
+							onPress={() => this.setState({ modalIsVisible: false })}
+						/>
+						{/* <TouchableOpacity
+							onPress={() => {
+								this.setState({ modalIsVisible: false });
+							}}
+						>
+							<Text>Kapat</Text>
+							
+						</TouchableOpacity> */}
+					</View>
+				</Modal>
 				<LinearGradient
 					style={{ flex: 1, borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
 					colors={['#607d8b', '#9c7aaf', '#d259cc', '#da8ae8', '#f78cc5', '#f194b4']}
@@ -51,7 +83,7 @@ export default class App extends React.Component {
 										marginRight: 20
 									}}
 								>
-									AVM Seç{' '}
+									AVM Seç
 								</Text>
 							</TouchableOpacity>
 						</View>
@@ -119,7 +151,6 @@ export default class App extends React.Component {
 					}}
 				/>
 				<View style={{ flex: 3, backgroundColor: '#4a5178' }}>
-					/>
 					<ScrollView>
 						<View style={{ flexDirection: 'column', justifyContent: 'space-around', marginTop: 30 }}>
 							<KokpitView
@@ -127,6 +158,7 @@ export default class App extends React.Component {
 								textTitle1="Yeni Müşteri Sayısı"
 								textTitle2="25632"
 								imageSource2={require('./assets/1.jpg')}
+								onPress={yPos => this.setState({ modalIsVisible: true, yPos: yPos })}
 							/>
 
 							<KokpitView
@@ -135,12 +167,14 @@ export default class App extends React.Component {
 								textTitle2="10580"
 								imageSource2={require('./assets/2.jpg')}
 							/>
+
 							<KokpitView
 								imageSource1={require('./assets/işletilenfaturalarıntplamı.png')}
 								textTitle1="İşletilen Fatura Sayısı"
 								textTitle2="5326"
 								imageSource2={require('./assets/1.jpg')}
 							/>
+
 							<KokpitView
 								imageSource1={require('./assets/kuponadedi.png')}
 								textTitle1={`İşletilen Faturaların ${'\n'} Toplam Tutarı`}
@@ -153,24 +187,22 @@ export default class App extends React.Component {
 								textTitle2="32168"
 								imageSource2={require('./assets/3.jpg')}
 							/>
+
 							<KokpitView
 								imageSource1={require('./assets/işlemyaptıranmüşteri.png')}
 								textTitle1={`Kupon Alan ${'\n'} Müşteri Sayısı`}
 								textTitle2="20695"
 								imageSource2={require('./assets/1.jpg')}
+								onPress={yPos => this.setState({ modalIsVisible: true, yPos: yPos })}
 							/>
-							<View style={{ height: 100 }} />
+							{/* <View style={{ height: 100 }} /> */}
 						</View>
 					</ScrollView>
-					<LinearGradient
+					{/* <LinearGradient
 						style={{ position: 'absolute', height: 100, bottom: 0, left: 0, right: 0 }}
 						colors={['transparent', '#21253baa', '#21253b', '#131524']}
 					>
 						<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-							{/* <Image
-								source={require('./assets/earthgif.gif')}
-								style={{ width: 40, height: 40, marginTop: 30 }}
-							/> */}
 							<TouchableOpacity onPress={() => {}}>
 								<View
 									style={{
@@ -184,7 +216,7 @@ export default class App extends React.Component {
 								</View>
 							</TouchableOpacity>
 						</View>
-					</LinearGradient>
+					</LinearGradient> */}
 				</View>
 			</View>
 		);
