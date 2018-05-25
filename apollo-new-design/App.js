@@ -1,5 +1,16 @@
 import React from 'react';
-import { Text, View, ScrollView, TouchableOpacity, Image, ImageBackground, Dimensions, Modal } from 'react-native';
+import {
+	Text,
+	View,
+	ScrollView,
+	TouchableOpacity,
+	Image,
+	ImageBackground,
+	Dimensions,
+	Modal,
+	Animated,
+	Easing
+} from 'react-native';
 import { EditView } from './src/components/EditView';
 import { LinearGradient } from 'expo';
 import KokpitView from './src/components/KokpitView';
@@ -7,12 +18,75 @@ import DijitalClock from './src/components/DijitalClock';
 import KokpitViewAnim from './src/components/KokpitViewAnim';
 
 const { width, height } = Dimensions.get('window');
+const data = [
+	{
+		icon: require('./assets/yenimüşteri.png'),
+		title: `Yeni Müşteri Sayısı`,
+		value: '123123',
+		graphImage: require('./assets/1.jpg')
+	},
+	{
+		icon: require('./assets/işletilenfaturasayısı.png'),
+		title: `İşletilen Fatura Sayısı`,
+		value: '234234',
+		graphImage: require('./assets/2.jpg')
+	},
+	{
+		icon: require('./assets/işletilenfaturalarıntplamı.png'),
+		title: `İşletilen Faturaların ${'\n'} Toplam Tutarı`,
+		value: '12332',
+		graphImage: require('./assets/1.jpg')
+	},
+	{
+		icon: require('./assets/kuponadedi.png'),
+		title: `Kupon Adedi`,
+		value: '2423',
+		graphImage: require('./assets/2.jpg')
+	},
+	{
+		icon: require('./assets/kuponalanmüşteri.png'),
+		title: `Kupon Alan ${'\n'} Müşteri Sayısı`,
+		value: '20695',
+		graphImage: require('./assets/1.jpg')
+	},
+	{
+		icon: require('./assets/işlemyaptıranmüşteri.png'),
+		title: `İşlem Yaptıran ${'\n'} Müşteri Sayısı`,
+		value: '20695',
+		graphImage: require('./assets/2.jpg')
+	}
+];
 export default class App extends React.Component {
 	state = {
 		modalIsVisible: false,
-		yPos: 0
+		yPos: 0,
+		selectedItemIndex: -1,
+		modalColor: new Animated.Value(0)
 	};
+
+	animateModal() {
+		this.state.modalColor.setValue(0);
+		Animated.timing(this.state.modalColor, {
+			toValue: 1,
+			duration: 1000,
+			easing: Easing.linear
+		}).start();
+	}
+
+	handleOnPress(yPos, index) {
+		this.setState({ yPos: yPos, selectedItemIndex: index });
+		setTimeout(() => {
+			this.setState({ modalIsVisible: true });
+			this.animateModal();
+		}, 100);
+	}
+
 	render() {
+		var bgColor = this.state.modalColor.interpolate({
+			inputRange: [0, 0.5, 1],
+			outputRange: ['#0000', '#0003', '#000c']
+		});
+
 		return (
 			<View
 				style={{
@@ -28,13 +102,10 @@ export default class App extends React.Component {
 						alert('Modal has been closed.');
 					}}
 				>
-					<View style={{ backgroundColor: '#0009', flex: 1, justifyContent: 'center' }}>
+					<Animated.View style={{ backgroundColor: bgColor, flex: 1 }}>
 						<KokpitViewAnim
+							data={data[this.state.selectedItemIndex]}
 							yPos={this.state.yPos}
-							imageSource1={require('./assets/işlemyaptıranmüşteri.png')}
-							textTitle1={`Kupon Alan ${'\n'} Müşteri Sayısı`}
-							textTitle2="20695"
-							imageSource2={require('./assets/1.jpg')}
 							onPress={() => this.setState({ modalIsVisible: false })}
 						/>
 						{/* <TouchableOpacity
@@ -45,7 +116,7 @@ export default class App extends React.Component {
 							<Text>Kapat</Text>
 							
 						</TouchableOpacity> */}
-					</View>
+					</Animated.View>
 				</Modal>
 				<LinearGradient
 					style={{ flex: 1, borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
@@ -154,46 +225,44 @@ export default class App extends React.Component {
 					<ScrollView>
 						<View style={{ flexDirection: 'column', justifyContent: 'space-around', marginTop: 30 }}>
 							<KokpitView
-								imageSource1={require('./assets/yenimüşteri.png')}
-								textTitle1="Yeni Müşteri Sayısı"
-								textTitle2="25632"
-								imageSource2={require('./assets/1.jpg')}
-								onPress={yPos => this.setState({ modalIsVisible: true, yPos: yPos })}
+								data={data[0]}
+								onPress={yPos => {
+									this.handleOnPress(yPos, 0);
+								}}
 							/>
 
 							<KokpitView
-								imageSource1={require('./assets/işletilenfaturasayısı.png')}
-								textTitle1={`İşlem Yaptıran ${'\n'} Müşteri Sayısı`}
-								textTitle2="10580"
-								imageSource2={require('./assets/2.jpg')}
+								data={data[1]}
+								onPress={yPos => {
+									this.handleOnPress(yPos, 1);
+								}}
 							/>
 
 							<KokpitView
-								imageSource1={require('./assets/işletilenfaturalarıntplamı.png')}
-								textTitle1="İşletilen Fatura Sayısı"
-								textTitle2="5326"
-								imageSource2={require('./assets/1.jpg')}
+								data={data[2]}
+								onPress={yPos => {
+									this.handleOnPress(yPos, 2);
+								}}
 							/>
 
 							<KokpitView
-								imageSource1={require('./assets/kuponadedi.png')}
-								textTitle1={`İşletilen Faturaların ${'\n'} Toplam Tutarı`}
-								textTitle2="4869321 "
-								imageSource2={require('./assets/2.jpg')}
+								data={data[3]}
+								onPress={yPos => {
+									this.handleOnPress(yPos, 3);
+								}}
 							/>
 							<KokpitView
-								imageSource1={require('./assets/kuponalanmüşteri.png')}
-								textTitle1="Kupon Adedi"
-								textTitle2="32168"
-								imageSource2={require('./assets/3.jpg')}
+								data={data[4]}
+								onPress={yPos => {
+									this.handleOnPress(yPos, 4);
+								}}
 							/>
 
 							<KokpitView
-								imageSource1={require('./assets/işlemyaptıranmüşteri.png')}
-								textTitle1={`Kupon Alan ${'\n'} Müşteri Sayısı`}
-								textTitle2="20695"
-								imageSource2={require('./assets/1.jpg')}
-								onPress={yPos => this.setState({ modalIsVisible: true, yPos: yPos })}
+								data={data[5]}
+								onPress={yPos => {
+									this.handleOnPress(yPos, 5);
+								}}
 							/>
 							{/* <View style={{ height: 100 }} /> */}
 						</View>

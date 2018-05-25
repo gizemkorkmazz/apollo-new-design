@@ -2,16 +2,41 @@ import React from 'react';
 import { Text, Image, View, TouchableOpacity } from 'react-native';
 
 export default class KokpitView extends React.Component {
-	yPos = 0;
+	state = {
+		yPos: 0
+	};
+
+	y = 0;
+
 	handleLayout(event) {
-		this.yPos = event.nativeEvent.layout.y;
+		this.setState({ yPos: event.nativeEvent.layout.y });
+		console.log(this.state.yPos);
+	}
+
+	componentDidMount() {
+		setTimeout(() => this.measureProgressBar(), 100);
+	}
+
+	measureProgressBar() {
+		this.refs.progressBar.measure((a, b, width, height, px, py) => {
+			console.log(a, b, width, height, px, py);
+			this.y = py;
+		});
 	}
 
 	render() {
-		const { imageSource1, imageSource2, textTitle1, textTitle2, onPress } = this.props;
+		const { icon, graphImage, title, value } = this.props.data;
+		const { onPress } = this.props;
 
 		return (
-			<TouchableOpacity onPress={() => onPress(yPos)} onLayout={this.handleLayout}>
+			<TouchableOpacity
+				ref="progressBar"
+				onPress={() => {
+					console.log(this.y);
+					onPress(this.y);
+				}}
+				// onLayout={this.handleLayout}
+			>
 				<View
 					style={{
 						flexDirection: 'row',
@@ -26,14 +51,14 @@ export default class KokpitView extends React.Component {
 					}}
 				>
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-						<Image source={imageSource1} style={{ width: 50, height: 50 }} />
-						<Text style={{ color: 'white', textAlign: 'left' }}> {textTitle1}</Text>
+						<Image source={icon} style={{ width: 50, height: 50 }} />
+						<Text style={{ color: 'white', textAlign: 'left' }}> {title}</Text>
 					</View>
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-						<Text style={{ color: 'white', marginRight: 10 }}> {textTitle2}</Text>
+						<Text style={{ color: 'white', marginRight: 10 }}> {value}</Text>
 
 						<Image
-							source={imageSource2}
+							source={graphImage}
 							style={{
 								width: 60,
 								height: 60,
