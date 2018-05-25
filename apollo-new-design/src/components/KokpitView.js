@@ -13,7 +13,6 @@ export default class KokpitView extends React.Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.scrollPositionChangedCounter !== this.props.scrollPositionChangedCounter) {
-			console.log('kokpitivew changed ');
 			this.measureProgressBar();
 		}
 	}
@@ -24,7 +23,6 @@ export default class KokpitView extends React.Component {
 
 	measureProgressBar() {
 		this.refs.progressBar.measure((a, b, width, height, px, py) => {
-			console.log(a, b, width, height, px, py);
 			this.y = py;
 		});
 	}
@@ -37,7 +35,6 @@ export default class KokpitView extends React.Component {
 			<TouchableOpacity
 				ref="progressBar"
 				onPress={() => {
-					console.log(this.y);
 					onPress(this.y);
 				}}
 				// onLayout={this.handleLayout}

@@ -45,8 +45,6 @@ export default class KokpitViewAnim extends React.Component {
 			outputRange: [this.props.yPos - 25, height / 2 - 150]
 		});
 
-		console.log('this.props.yPos : ', this.props.yPos);
-
 		return (
 			<Animated.View
 				style={{
